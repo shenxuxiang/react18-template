@@ -27,7 +27,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "release.tar.gz"
-          tag: ${{ github.ref }}
+          tag: release-${{ github.ref }}
           draft: false
           prerelease: false
           token: ${{ secrets.ACCESS_TOKEN }}
