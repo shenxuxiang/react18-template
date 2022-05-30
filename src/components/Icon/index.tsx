@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo } from "react";
 
 interface IProps {
   type: string;
@@ -11,7 +11,11 @@ function Icon(props: IProps) {
   const { type, onClick, className, style } = props;
 
   return (
-    <i className={`icon icon-${type}${className ? ' ' + className : ''}`} onClick={() => onClick?.()} style={style} />
+    <i
+      className={`icon icon-${type}${className ? " " + className : ""}`}
+      onClick={() => onClick?.()}
+      style={style}
+    />
   );
 }
 
