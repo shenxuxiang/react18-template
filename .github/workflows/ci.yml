@@ -1,0 +1,33 @@
+name: Build & Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    name: Build And Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install NodeJs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Build
+        run: |
+          npm install
+          npm run build
+          tar -czvf release.tar.gz dist/*
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "release.tar.gz"
+          tag: ${{ github.ref }}
+          draft: false
+          prerelease: false
+          token: ${{ secrets.ACCESS_TOKEN }}
