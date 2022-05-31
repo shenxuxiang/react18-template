@@ -28,7 +28,7 @@ jobs:
       msg: 'hello world'
     steps:
       - name: 'first-step'
-        if: ${{ SERVER == 'production' }}
+        if: ${{ env.SERVER == 'production' }}
         run: |
           echo "测试 if 条件是否成立；msg: ${msg}"
           echo "jobs > test-two job > first-step > end"
