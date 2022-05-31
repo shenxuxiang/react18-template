@@ -1,0 +1,39 @@
+name: "learn github actions"
+on:
+  push:
+    branches:
+      - qa
+      - master
+
+env:
+  SERVER: 'production'
+
+jobs:
+  test-one:
+    name: 'test environment'
+    runs-on: ubuntu-latest
+    env:
+      USER_NAME: 'shenxuxiang&&mengtiantian'
+    steps:
+      - name: 'first-step'
+        run: |
+          echo "server: ${SERVER}; username: ${USER_NAME}"
+          echo "jobs > test-one job > first-step > end"
+
+  test-two:
+    name: 'test if'
+    runs-on: ubuntu-latest
+    needs: test-one
+    env:
+      msg: 'hello world'
+    steps:
+      - name: 'first-step'
+        if: ${{ SERVER == 'production' }}
+        run: |
+          echo "测试 if 条件是否成立；msg: ${msg}"
+          echo "jobs > test-two job > first-step > end"
+
+      - name: 'second-step'
+        run: |
+          echo "server: ${SERVER}; 这里就是想看看 wrokflow 中定义的 env"
+          echo "jobs > test-two job > second-step > end"
