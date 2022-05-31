@@ -14,7 +14,8 @@ jobs:
         id: "timestamp"
         run: |
           echo "Time Stamp start"
-          echo ":set-output name=random::$(echo "${RANDOM}")"
+          echo "::set-output name=time::$(echo `date --date="+8 hours" +%Y%m%d%H%M%S`)"
+          echo "::set-output name=random::$(echo "${RANDOM}")"
       - name: 'end step'
         env:
           time: ${{ steps.timestamp.outputs.time }}
