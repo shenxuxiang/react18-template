@@ -42,4 +42,7 @@ jobs:
         env:
           U_ID: 2003310
         if: ${{ env.U_ID == 2003310 }}
-        run: echo "测试 if 条件中如何获取在 step 中设置的环境变量；uid=${U_ID}"
+        run: |
+          echo "测试 if 条件中如何获取在 step 中设置的环境变量；uid=${U_ID}"
+          echo '${{ toJSON(github.event) }}'
+          echo '${{ toJSON(github.event.head_commit) }}'
