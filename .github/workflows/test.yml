@@ -30,3 +30,14 @@ jobs:
           echo "userEmail: ${user_email}"
           echo "========================"
           echo "commitMessage: ${commit_message}"
+
+      - name: "time stamp"
+        id: "timestamp"
+        run: |
+          echo "Time Stamp start"
+          echo "::set-output name=time::$(echo date +%Y%m%d%H%M%S)"
+
+      - name: 'end step'
+        env:
+          time: ${{ steps.timestamp.outputs.time }}
+        run: echo "release-${time}"

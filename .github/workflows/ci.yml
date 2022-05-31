@@ -18,6 +18,10 @@ jobs:
         with:
           node-version: 16
 
+      - name: "Time Stamp"
+        id: "timestamp"
+        run: echo `date +%Y%m%d%H%M%S`
+
       - name: "Build"
         run: |
           npm install
