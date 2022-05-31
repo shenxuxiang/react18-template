@@ -8,6 +8,7 @@ jobs:
   build-and-deploy:
     name: "Build And Deploy"
     runs-on: ubuntu-latest
+    if: ${{ startsWith(github.event.head_commit.message, 'build') }}
     steps:
       - name: "Checkout"
         uses: actions/checkout@v3

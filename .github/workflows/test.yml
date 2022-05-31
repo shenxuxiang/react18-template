@@ -12,37 +12,18 @@ jobs:
   test-one:
     name: 'test environment'
     runs-on: ubuntu-latest
-    env:
-      USER_NAME: 'shenxuxiang&&mengtiantian'
     steps:
       - name: 'first-step'
-        run: |
-          echo "server: ${SERVER}; username: ${USER_NAME}"
-          echo "jobs > test-one job > first-step > end"
-
-  test-two:
-    name: 'test if'
-    runs-on: ubuntu-latest
-    needs: test-one
-    env:
-      msg: 'hello world'
-    steps:
-      - name: 'first-step'
-        if: ${{ env.SERVER == 'production' }}
-        run: |
-          echo "测试 if 条件是否成立；msg: ${msg}"
-          echo "jobs > test-two job > first-step > end"
-
-      - name: 'second-step'
-        run: |
-          echo "server: ${SERVER}; 这里就是想看看 wrokflow 中定义的 env"
-          echo "jobs > test-two job > second-step > end"
-
-      - name: 'second-three'
         env:
-          U_ID: 2003310
-        if: ${{ env.U_ID == 2003310 }}
+          ref: ${{ github.ref }}
+          ref_name: ${{ github.ref_name }}
+          ref_type: ${{ github.ref_type }}
+          info: ${{ toJSON(github) }}
         run: |
-          echo "测试 if 条件中如何获取在 step 中设置的环境变量；uid=${U_ID}"
-          echo '${{ toJSON(github.event) }}'
-          echo '${{ toJSON(github.event.head_commit) }}'
+          echo "${ref}"
+          echo "========================"
+          echo "${ref_name}"
+          echo "========================"
+          echo "${ref_type}"
+          echo "========================"
+          echo "${info}"
