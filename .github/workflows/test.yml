@@ -10,34 +10,14 @@ jobs:
     name: 'query github info'
     runs-on: ubuntu-latest
     steps:
-      - name: 'first-step'
-        env:
-          ref: ${{ github.ref }}
-          ref_name: ${{ github.ref_name }}
-          ref_type: ${{ github.ref_type }}
-          user_name: ${{ github.event.pusher.name }}
-          user_email: ${{ github.event.pusher.email }}
-          commit_message: ${{ github.event.head_commit.message }}
-        run: |
-          echo "ref: ${ref}"
-          echo "========================"
-          echo "ref_name: ${ref_name}"
-          echo "========================"
-          echo "ref_branch: ${ref_type}"
-          echo "========================"
-          echo "userName: ${user_name}"
-          echo "========================"
-          echo "userEmail: ${user_email}"
-          echo "========================"
-          echo "commitMessage: ${commit_message}"
-
       - name: "time stamp"
         id: "timestamp"
         run: |
           echo "Time Stamp start"
           echo "::set-output name=time::$(echo `date --date="+8 hours" +%Y%m%d%H%M%S`)"
-
+          echo ":set-output name=random::$(echo "${RANDOM}")"
       - name: 'end step'
         env:
           time: ${{ steps.timestamp.outputs.time }}
-        run: echo "release-${time}"
+          random: ${{ steps.timestamp.output.random }}
+        run: echo "release-${time}-${random}"
