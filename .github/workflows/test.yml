@@ -20,4 +20,7 @@ jobs:
         env:
           time: ${{ steps.timestamp.outputs.time }}
           random: ${{ steps.timestamp.outputs.random }}
-        run: echo "release-${time}-${random}"
+        run: |
+          echo "release-${time}-${random}"
+          echo "random-${random}"
+
