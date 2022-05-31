@@ -19,5 +19,5 @@ jobs:
       - name: 'end step'
         env:
           time: ${{ steps.timestamp.outputs.time }}
-          random: ${{ steps.timestamp.output.random }}
+          random: ${{ steps.timestamp.outputs.random }}
         run: echo "release-${time}-${random}"
