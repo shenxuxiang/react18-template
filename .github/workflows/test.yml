@@ -33,10 +33,12 @@ jobs:
 
       - name: "time stamp"
         id: "timestamp"
+        env:
+          timestamp: ${{ github.event.head_commit.timestamp }}
         run: |
           echo "Time Stamp start"
           echo `date -R`
-          echo "::set-output name=time::$(echo `date +%Y%m%d%H%M%S`)"
+          echo "::set-output name=time::$(echo `date --date="${timestamp}" +%Y%m%d%H%M%S`)"
 
       - name: 'end step'
         env:
