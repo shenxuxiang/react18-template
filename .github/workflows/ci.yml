@@ -20,12 +20,13 @@ jobs:
 
       - name: "Time Stamp"
         id: "timestamp"
-        run: echo `date +%Y%m%d%H%M%S`
+        run: echo "::set-output name=deployTime::$(echo `date --date="+8 hours" +%Y%m%d%H%M%S`)"
 
       - name: "Build"
         run: |
           npm install
           npm run build
+          mv "dist" "dist.${steps.timestamp.outputs.deployTime}"
 
       - name: "Deploy"
         uses: appleboy/scp-action@master
@@ -34,5 +35,5 @@ jobs:
           port: ${{ secrets.PORT }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          source: "dist"
+          source: "dist.${steps.timestamp.outputs.deployTime}"
           target: "/root/workspace/"
