@@ -35,7 +35,7 @@ jobs:
         id: "timestamp"
         run: |
           echo "Time Stamp start"
-          echo "::set-output name=time::$(echo date +%Y%m%d%H%M%S)"
+          echo "::set-output name=time::$(echo `date +%Y%m%d%H%M%S`)"
 
       - name: 'end step'
         env:
