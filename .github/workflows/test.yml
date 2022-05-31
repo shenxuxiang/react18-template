@@ -5,12 +5,9 @@ on:
       - qa
       - master
 
-env:
-  SERVER: 'production'
-
 jobs:
   test-one:
-    name: 'test environment'
+    name: 'query github info'
     runs-on: ubuntu-latest
     steps:
       - name: 'first-step'
@@ -18,12 +15,18 @@ jobs:
           ref: ${{ github.ref }}
           ref_name: ${{ github.ref_name }}
           ref_type: ${{ github.ref_type }}
-          info: ${{ toJSON(github) }}
+          user_name: ${{ github.event.pusher.name }}
+          user_email: ${{ github.event.pusher.email }}
+          commit_message: ${{ github.event.head_commit.message }}
         run: |
-          echo "${ref}"
+          echo "ref: ${ref}"
           echo "========================"
-          echo "${ref_name}"
+          echo "ref_name: ${ref_name}"
           echo "========================"
-          echo "${ref_type}"
+          echo "ref_branch: ${ref_type}"
           echo "========================"
-          echo "${info}"
+          echo "userName: ${user_name}"
+          echo "========================"
+          echo "userEmail: ${user_email}"
+          echo "========================"
+          echo "commitMessage: ${commit_message}"
