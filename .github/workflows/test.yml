@@ -41,5 +41,5 @@ jobs:
       - name: 'second-three'
         env:
           U_ID: 2003310
-        if: ${{ U_ID == 2003310 }}
+        if: ${{ env.U_ID == 2003310 }}
         run: echo "测试 if 条件中如何获取在 step 中设置的环境变量；uid=${U_ID}"
