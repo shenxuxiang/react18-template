@@ -8,7 +8,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
-  entry: path.resolve('src/index.tsx'),
+  entry: path.resolve('src-1/index.tsx'),
   output: {
     clean: true,
     path: path.resolve('dist'),
@@ -38,97 +38,93 @@ module.exports = {
   },
   cache: true,
   module: {
-    rules: [
-      {
-        oneOf: [
-          {
-            test: /\.(tsx?|jsx?)$/,
-            include: path.resolve('src'),
-            loader: require.resolve('babel-loader'),
-            options: {
-              cacheDirectory: true,
-              cacheCompression: false,
-            }
-          }, {
-            test: /\.module\.css$/,
-            include: path.resolve('src'),
-            use: styleLoader({
-              url: true,
-              import: true,
-              importLoaders: 2,
-              modules: {
-                auto: true,
-                mode: 'local',
-                localIdentName: '[path][name]-[local]-[hash:base64:5]'
-              },
-            })
-          }, {
-            test: /\.css$/,
-            include: path.resolve('src'),
-            use: styleLoader({
-              url: true,
-              import: true,
-              importLoaders: 2,
-              modules: false,
-            }),
-          }, {
-            test: /\.module\.less$/,
-            include: path.resolve('src'),
-            use: styleLoader({
-              url: true,
-              import: true,
-              importLoaders: 2,
-              modules: {
-                auto: true,
-                mode: 'local',
-                localIdentName: '[path][name]-[local]-[hash:base64:5]'
-              },
-            }, require.resolve('less-loader'))
-          }, {
-            test: /\.less$/,
-            include: path.resolve('src'),
-            use: styleLoader({
-              url: true,
-              import: true,
-              importLoaders: 2,
-              modules: false,
-            }, require.resolve('less-loader'))
-          }, {
-            test: /\.(jpg|jpeg|png|gif|bmp)$/,
-            include: path.resolve('src'),
-            type: 'asset',
-            parser: {
-              dataUrlCondition: {
-                maxSize: 10000,
-              },
-            },
-            generator: {
-              emit: true,
-              filename: 'static/images/[name].[hash:8].[ext]',
-              publicPath: env.PUBLIC_PATH,
-            }
-          }, {
-            test: /\.(ttf|woff2?|eot)$/,
-            type: 'asset',
-            include: path.resolve('src'),
-            parser: {
-              dataUrlCondition: {
-                maxSize: 10000,
-              },
-            },
-            generator: {
-              emit: true,
-              filename: 'static/font/[name].[hash:8].[ext]',
-              publicPath: env.PUBLIC_PATH,
-            }
-          }, {
-            test: /\.svg$/,
-            include: path.resolve('src'),
-            loader: require.resolve('@svgr/webpack'),
-          }
-        ]
-      }
-    ]
+    rules: [{
+      oneOf: [{
+        test: /\.(tsx?|jsx?)$/,
+        include: path.resolve('src'),
+        loader: require.resolve('babel-loader'),
+        options: {
+          cacheDirectory: true,
+          cacheCompression: false,
+        }
+      }, {
+        test: /\.module\.css$/,
+        include: path.resolve('src'),
+        use: styleLoader({
+          url: true,
+          import: true,
+          importLoaders: 2,
+          modules: {
+            auto: true,
+            mode: 'local',
+            localIdentName: '[path][name]-[local]-[hash:base64:5]'
+          },
+        })
+      }, {
+        test: /\.css$/,
+        include: path.resolve('src'),
+        use: styleLoader({
+          url: true,
+          import: true,
+          importLoaders: 2,
+          modules: false,
+        }),
+      }, {
+        test: /\.module\.less$/,
+        include: path.resolve('src'),
+        use: styleLoader({
+          url: true,
+          import: true,
+          importLoaders: 2,
+          modules: {
+            auto: true,
+            mode: 'local',
+            localIdentName: '[path][name]-[local]-[hash:base64:5]'
+          },
+        }, require.resolve('less-loader'))
+      }, {
+        test: /\.less$/,
+        include: path.resolve('src'),
+        use: styleLoader({
+          url: true,
+          import: true,
+          importLoaders: 2,
+          modules: false,
+        }, require.resolve('less-loader'))
+      }, {
+        test: /\.(jpg|jpeg|png|gif|bmp)$/,
+        include: path.resolve('src'),
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10000,
+          },
+        },
+        generator: {
+          emit: true,
+          filename: 'static/images/[name].[hash:8].[ext]',
+          publicPath: env.PUBLIC_PATH,
+        }
+      }, {
+        test: /\.(ttf|woff2?|eot)$/,
+        type: 'asset',
+        include: path.resolve('src'),
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10000,
+          },
+        },
+        generator: {
+          emit: true,
+          filename: 'static/font/[name].[hash:8].[ext]',
+          publicPath: env.PUBLIC_PATH,
+        }
+      }, {
+        test: /\.svg$/,
+        include: path.resolve('src'),
+        loader: require.resolve('@svgr/webpack'),
+      }]
+    }]
   },
   plugins: [
     new HtmlWebpackPlugin({
