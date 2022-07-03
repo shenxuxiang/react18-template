@@ -30,8 +30,6 @@ jobs:
   job-two:
     name: job-needs
     runs-on: ubuntu-latest
-    env:
-      USER_NAME: ${{ env.SERVER_NAME }}
     steps:
       - name: start action
         if: ${{ env.SERVER_NAME == 'production' }}
