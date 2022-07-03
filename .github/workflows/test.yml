@@ -6,8 +6,8 @@ on:
       - release**
       - qa**
 
-env:
-  SERVER_NAME: 'production'
+# env:
+  # SERVER_NAME: 'production'
 
 jobs:
   job-one:
@@ -30,12 +30,14 @@ jobs:
   job-two:
     name: job-needs
     runs-on: ubuntu-latest
+    env:
+      SERVER_NAME: production
+    if: ${{SERVER_NAME == 'production'}}
     needs:
       - job-one
     steps:
       - name: start action
-        if: ${{env.SERVER_NAME == 'production'}}
-        run: echo "hello world; environment = ${SERVER}"
+        run: echo "hello world; environment = ${SERVER_NAME}"
 
   job-three:
     name: job-three
