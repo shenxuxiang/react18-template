@@ -19,4 +19,4 @@ jobs:
           commit_message: ${{ github.event.head_commit.message}}
           string: ${{ join(github.event.issue.labels.*.name, '-') }}
         run: |
-          echo "${commit_message}"
+          echo "${commit_message}; ${string}"
