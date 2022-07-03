@@ -27,3 +27,21 @@ jobs:
           echo "release-${time}-${random}"
           echo "random-${random}"
 
+  job-two:
+    name: job-needs
+    runs-on: ubuntu-latest
+    if: env.SERVER == production
+    needs:
+      - job-one
+    steps:
+      - name: start action
+        run: echo "hello world; environment = ${SERVER}"
+
+  job-three:
+    name: job-three
+    runs-on: ubuntu-latest
+    steps:
+      - name: start action
+        run: echo "this is a job three"
+
+
