@@ -30,12 +30,12 @@ jobs:
   job-two:
     name: job-needs
     runs-on: ubuntu-latest
-    needs:
-      - job-one
+    env:
+      USER_NAME: ${{ env.SERVER_NAME }}
     steps:
       - name: start action
         if: ${{ env.SERVER_NAME == 'production' }}
-        run: echo "hello world; environment = ${SERVER_NAME}"
+        run: echo "hello world; environment = ${SERVER_NAME}; ${USER_NAME}"
 
   job-three:
     name: job-three
