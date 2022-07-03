@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SERVER_NAME: production
-    if: ${{ workflow.env.SERVER_NAME == 'production' }}
+    if: ${{ jobs.job-two.env.SERVER_NAME == 'production' }}
     needs:
       - job-one
     steps:
