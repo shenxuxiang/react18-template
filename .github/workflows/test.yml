@@ -6,8 +6,8 @@ on:
       - release**
       - qa**
 
-# env:
-  # SERVER_NAME: 'production'
+env:
+  SERVER_NAME: 'production'
 
 jobs:
   job-one:
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SERVER_NAME: production
-    if: ${{ job-two.env.SERVER_NAME == 'production' }}
+    if: ${{ workflow.env.SERVER_NAME == 'production' }}
     needs:
       - job-one
     steps:
