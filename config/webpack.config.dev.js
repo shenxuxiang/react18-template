@@ -8,7 +8,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
-  entry: path.resolve('src/index.tsx'),
+  entry: path.resolve('src-1/index.tsx'),
   output: {
     clean: true,
     path: path.resolve('dist'),
@@ -42,7 +42,11 @@ module.exports = {
   module: {
     rules: [{
       oneOf: [{
+<<<<<<< HEAD
         test: /\.(tsx|ts|js|jsx)$/,
+=======
+        test: /\.(tsx?|jsx?)$/,
+>>>>>>> 3ca1650217c6bb8d439012c1d50af2977aa2eb60
         include: path.resolve('src'),
         loader: require.resolve('babel-loader'),
         options: {
