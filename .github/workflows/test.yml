@@ -32,9 +32,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - job-one
-    if: ${{env.SERVER_NAME == 'production'}}
     steps:
       - name: start action
+        if: ${{env.SERVER_NAME == 'production'}}
         run: echo "hello world; environment = ${SERVER}"
 
   job-three:
