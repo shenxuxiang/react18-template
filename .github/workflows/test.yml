@@ -7,7 +7,7 @@ on:
       - qa**
 
 env:
-  SERVER: 'production'
+  SERVER_NAME: 'production'
 
 jobs:
   job-one:
@@ -30,11 +30,9 @@ jobs:
   job-two:
     name: job-needs
     runs-on: ubuntu-latest
-    env:
-      user_name: sxx
-    if: ${{ env.user_name == 'sxx' }}
     needs:
       - job-one
+    if: ${{env.SERVER_NAME == 'production'}}
     steps:
       - name: start action
         run: echo "hello world; environment = ${SERVER}"
