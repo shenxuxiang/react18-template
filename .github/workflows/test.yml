@@ -15,31 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "declare variable"
-        id: "declare_variable"
-        run: |
-          echo "::set-output name=time::$(echo `date --date="now +8 hours" +%Y%m%d%H%M%S`)"
-          echo "::set-output name=random::$(echo "${RANDOM}")"
-      - name: 'declare environment variable'
         env:
-          time: ${{ steps.declare_variable.outputs.time }}
-          random: ${{ steps.declare_variable.outputs.random }}
+          commit_message: ${{ github.event.head_commit.message}}
+          string: ${{ join(github.event.issue.labels.*.name, '-') }}
         run: |
-          echo "release-${time}-${random}"
-          echo "random-${random}"
-
-  job-two:
-    name: job-needs
-    runs-on: ubuntu-latest
-    steps:
-      - name: start action
-        if: ${{ env.SERVER_NAME == 'production' }}
-        run: echo "hello world; environment = ${SERVER_NAME}; ${USER_NAME}"
-
-  job-three:
-    name: job-three
-    runs-on: ubuntu-latest
-    steps:
-      - name: start action
-        run: echo "this is a job three"
-
-
+          echo ${{ startsWith(commit_message) }}
