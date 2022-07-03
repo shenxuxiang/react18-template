@@ -17,6 +17,6 @@ jobs:
       - name: "declare variable"
         env:
           commit_message: ${{ github.event.head_commit.message}}
-          string: ${{ join(github.event.issue.labels.*.name, '-') }}
+          string: ${{ toJSON(github.event) }}
         run: |
           echo "${commit_message}; ${string}"
