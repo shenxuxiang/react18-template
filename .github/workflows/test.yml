@@ -7,7 +7,7 @@ on:
       - qa**
 
 env:
-  SERVER: production
+  SERVER: 'production'
 
 jobs:
   job-one:
@@ -30,7 +30,7 @@ jobs:
   job-two:
     name: job-needs
     runs-on: ubuntu-latest
-    if: ${{ SERVER == 'production' }}
+    if: ${{ env.SERVER == 'production' }}
     needs:
       - job-one
     steps:
