@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SERVER_NAME: production
-    if: ${{env.SERVER_NAME == 'production'}}
+    if: ${{github.event_name == 'push'}}
     needs:
       - job-one
     steps:
