@@ -34,16 +34,23 @@ module.exports = {
     runtimeChunk: true,
     splitChunks: {
       chunks: 'all',
-      maxSize: 50000,
+      maxSize: 200000,
       minSize: 25000,
       minRemainingSize: 25000,
       maxInitialRequests: 30,
       maxAsyncRequests: 30,
-      enforceSizeThreshold: 50000,
+      enforceSizeThreshold: 200000,
       minChunks: 2,
     },
   },
-  cache: true,
+  cache: {
+    type: 'filesystem',
+    store: 'pack',
+    version: 'sss',
+    buildDependencies: {
+      config: [__filename],
+    },
+  },
   module: {
     rules: [
       {
@@ -53,6 +60,7 @@ module.exports = {
             include: path.resolve('src'),
             loader: require.resolve('babel-loader'),
             options: {
+              configFile: true,
               compact: true,
               cacheDirectory: true,
               cacheCompression: true,
@@ -112,7 +120,7 @@ module.exports = {
             },
             generator: {
               emit: true,
-              filename: 'static/images/[name].[hash:8].[ext]',
+              filename: 'static/images/[name].[hash:8][ext]',
               publicPath: env.PUBLIC_PATH,
             }
           }, {
@@ -126,7 +134,7 @@ module.exports = {
             },
             generator: {
               emit: true,
-              filename: 'static/font/[name].[hash:8].[ext]',
+              filename: 'static/font/[name].[hash:8][ext]',
               publicPath: env.PUBLIC_PATH,
             }
           }, {

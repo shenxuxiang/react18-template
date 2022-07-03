@@ -2,24 +2,27 @@ name: "learn github actions"
 on:
   push:
     branches:
-      - qa
       - master
+      - release**
+      - qa**
+
+env:
+  SERVER: production
 
 jobs:
-  test-one:
+  job-one:
     name: 'query github info'
     runs-on: ubuntu-latest
     steps:
-      - name: "time stamp"
-        id: "timestamp"
+      - name: "declare variable"
+        id: "declare_variable"
         run: |
-          echo "Time Stamp start"
-          echo "::set-output name=time::$(echo `date --date="+8 hours" +%Y%m%d%H%M%S`)"
+          echo "::set-output name=time::$(echo `date --date="now +8 hours" +%Y%m%d%H%M%S`)"
           echo "::set-output name=random::$(echo "${RANDOM}")"
-      - name: 'end step'
+      - name: 'declare environment variable'
         env:
-          time: ${{ steps.timestamp.outputs.time }}
-          random: ${{ steps.timestamp.outputs.random }}
+          time: ${{ steps.declare_variable.outputs.time }}
+          random: ${{ steps.declare_variable.outputs.random }}
         run: |
           echo "release-${time}-${random}"
           echo "random-${random}"

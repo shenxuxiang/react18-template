@@ -4,9 +4,9 @@ import { bindActionCreators, Dispatch } from 'redux';
 import actions from '@/redux/actions/pageOne';
 import Icon from '@/components/Icon';
 import styles from './index.module.less';
+import Foo from './Foo';
 
 const mapStateToProps = (state: any) => {
-  console.log(state);
   return state.pageOne;
 };
 
@@ -41,7 +41,12 @@ class PageOne extends PureComponent<any, any> {
   render() {
     return (
       <div className={styles.page}>
-        <h2 className={styles.page_title} onClick={() => this.setState({ count: this.state.count + 1 })}>
+        <h2
+          className={styles.page_title}
+          onClick={() => {
+            this.setState((prevState: any) => ({ count: prevState.count + 1 }))
+          }}
+        >
           hello world page one-{this.state.count}
         </h2>
         <div>hellow page one</div>
@@ -54,6 +59,7 @@ class PageOne extends PureComponent<any, any> {
         <Icon type="baidu" />
         <Icon type="xiaohongshu" />
         <Icon type="checkbox" />
+        <Foo></Foo>
       </div>
     );
   }
