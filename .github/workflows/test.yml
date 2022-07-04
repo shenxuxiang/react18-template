@@ -7,7 +7,7 @@ on:
       - qa**
 
 env:
-  SERVER_NAME: 'production'
+  SERVER_NAME: production
 
 jobs:
   job-one:
@@ -16,7 +16,6 @@ jobs:
     steps:
       - name: "declare variable"
         env:
-          commit_message: ${{ github.event.head_commit.message}}
-          string: ${{ toJSON(github.event) }}
+          commit_message: ${{ env.SERVER_NAME }} ${{ github.event.head_commit.message}}
         run: |
-          echo "${commit_message}; ${string}"
+          echo "${commit_message}"
