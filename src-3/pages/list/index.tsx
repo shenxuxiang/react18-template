@@ -7,7 +7,7 @@ function List(props: any) {
       <h1>hello world page list</h1>
       <div
         onClick={() =>
-          props.history.push({ pathname: "/home/session" })
+          props.history.push({ pathname: "/home", search: "_UID=4837" })
         }
       >
         to home

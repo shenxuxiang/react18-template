@@ -9,8 +9,10 @@ function RouterMap(props: any) {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/list/:id/:session" element={<List />}></Route>
+        <Route path="/home" element={<Home/>}>
+          <Route path="session" element={<List/>}></Route>
+        </Route>
+        <Route path="/list/:id/:session" element={<List/>}></Route>
       </Routes>
     </BrowserRouter>
   );

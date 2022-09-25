@@ -32,7 +32,7 @@ export default memo((props: any) => {
           </NavLink>
         </li>
       </ul>
-      <div className={styles.page_wrapper}>{props.chiwldren}</div>
+      <div className={styles.page_wrapper}>{props.children}</div>
     </div>
   );
 });

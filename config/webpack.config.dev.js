@@ -8,7 +8,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
-  entry: path.resolve('src-1/index.tsx'),
+  entry: path.resolve('src-2/index.tsx'),
   output: {
     clean: true,
     path: path.resolve('dist'),
@@ -27,26 +27,22 @@ module.exports = {
     runtimeChunk: true,
     splitChunks: {
       chunks: 'all',
-      // maxSize: 50000,
-      // minSize: 25000,
-      // minRemainingSize: 25000,
+      // maxSize: 1024 * 1024 * 2,
+      // minSize: 1024 * 20,
+      // minRemainingSize: 25 * 1024,
       // maxInitialRequests: 30,
       // maxAsyncRequests: 30,
-      // enforceSizeThreshold: 50000,
+      // enforceSizeThreshold: 1024 * 1024 * 2,
       // minChunks: 2,
-      name: 'vendor',
-      automaticNameDelimiter: '~',
+      // name: 'vendor',
+      // automaticNameDelimiter: '~',
     },
   },
   cache: true,
   module: {
     rules: [{
       oneOf: [{
-<<<<<<< HEAD
-        test: /\.(tsx|ts|js|jsx)$/,
-=======
         test: /\.(tsx?|jsx?)$/,
->>>>>>> 3ca1650217c6bb8d439012c1d50af2977aa2eb60
         include: path.resolve('src'),
         loader: require.resolve('babel-loader'),
         options: {
@@ -103,7 +99,7 @@ module.exports = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 10000,
+            maxSize: 10 * 1024,
           },
         },
         generator: {
@@ -122,7 +118,7 @@ module.exports = {
         },
         generator: {
           emit: true,
-          filename: 'static/font/[name].[hash:8].[ext]',
+          filename: 'static/font/[name].[hash:8][ext]',
           publicPath: env.PUBLIC_PATH,
         }
       }, {

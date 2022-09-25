@@ -1,32 +1,24 @@
 import { pathToRegexp } from 'path-to-regexp';
 
-type Opts = {
-  path: string;
-  [propName: string]: any
-}
+export default function matchPath(pathname, options) {
+  const { exact, path, end, strict } = options;
+  const paramNames = [];
+  const reg = pathToRegexp(path, paramNames, { end, strict });
+  const matched = reg.exec(pathname);
+  if (matched === null) return null;
 
-export default function matchPath(pathname: string, options: Opts) {
-  const { path, exact } = options;
-  const keys = [];
-  const regexp = pathToRegexp(path, keys, { exact });
-  const match = regexp.exec(pathname);
-
-  if (match == null) return null;
-
-  const url = match[0];
-  const values = match.slice(1);
-
+  const values = matched.slice(1);
+  const url = matched[0];
   const isExact = url === pathname;
-
   if (exact && !isExact) return null;
-
   return {
     path,
-    url: path === '/' && url === '' ? '/' : url,
+    url: path === '/' || path === '' ? '/' : url,
     isExact,
-    params: keys.reduce((memo, key, index) => {
+    params: paramNames.reduce((memo: any[], key: any, index: number) => {
       memo[key.name] = values[index];
       return memo;
-    }, {}),
+    }, []),
   };
 }
+

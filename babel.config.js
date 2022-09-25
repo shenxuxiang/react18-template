@@ -1,8 +1,8 @@
 const env = process.env.NODE_ENV;
 const presets = [
-  ["@babel/preset-env", { "modules": false, "debug": env === 'development' ? true : false, "useBuiltIns": "usage", "corejs": "3.22" }],
+  ["@babel/preset-env", { "modules": false, "debug": env === 'development' ? true : false, "useBuiltIns": "usage", "corejs": "3.22.7" }],
+  "@babel/preset-typescript",
   "@babel/preset-react",
-  "@babel/preset-typescript"
 ];
 
 const plugins = [

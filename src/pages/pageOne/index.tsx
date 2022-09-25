@@ -4,7 +4,9 @@ import { bindActionCreators, Dispatch } from 'redux';
 import actions from '@/redux/actions/pageOne';
 import Icon from '@/components/Icon';
 import styles from './index.module.less';
-import Foo from './Foo';
+import Foo, { fooSchema, model, users } from './Foo';
+
+console.log(fooSchema, model, users);
 
 const mapStateToProps = (state: any) => {
   return state.pageOne;
@@ -15,11 +17,13 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 };
 
 class PageOne extends PureComponent<any, any> {
+  public fooRef: any;
   public constructor(props: any) {
     super(props);
     this.state = {
       count: 0,
     };
+    this.fooRef = React.createRef();
   }
 
   componentDidMount() {
@@ -31,11 +35,18 @@ class PageOne extends PureComponent<any, any> {
         msg: '成功',
       })
       .then((data: any) => {
-        console.log(data, 'response');
+        console.log(this.props);
+
       })
       .catch((error: Error) => {
         console.log(error);
       });
+  }
+
+  componentDidUpdate() {
+    setTimeout(() => {
+      console.log(this.fooRef.current);
+    }, 200)
   }
 
   render() {
@@ -50,6 +61,7 @@ class PageOne extends PureComponent<any, any> {
           hello world page one-{this.state.count}
         </h2>
         <div>hellow page one</div>
+        <Foo />
         <Icon type="tongcheng" style={{ fontSize: 50 }} />
         <Icon type="peisong" style={{ fontSize: 40 }} />
         <Icon type="checkbox-hollow" style={{ fontSize: 30 }} />
@@ -59,7 +71,6 @@ class PageOne extends PureComponent<any, any> {
         <Icon type="baidu" />
         <Icon type="xiaohongshu" />
         <Icon type="checkbox" />
-        <Foo></Foo>
       </div>
     );
   }
